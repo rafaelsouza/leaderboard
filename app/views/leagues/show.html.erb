@@ -1,0 +1,28 @@
+<%- model_class = League -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => @league.name %> - Leaderboard</h1>
+</div>
+<% cache @leaderboard  do -%> 
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Points</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+<%end%>
+
+<%#= link_to t('.new', :default => t("helpers.links.new")),
+            new_league_path,
+            :class => 'btn btn-primary' %>
+
+<div class="form-actions">
+  <%#= link_to t('.back', :default => t("helpers.links.back")),
+              "/", :class => 'btn'  %>
+</div>
