@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+league = League.create!(name: "Ping Pong League")
+
+rafael = Player.create!(name:"Rafael")
+
+league.players << rafael
+
+league.save!
