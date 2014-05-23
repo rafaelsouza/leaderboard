@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20140326032848) do
   create_table "league_players", force: true do |t|
     t.integer  "league_id"
     t.integer  "player_id"
+    t.decimal  "score",      precision: 10, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end

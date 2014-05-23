@@ -2,7 +2,7 @@
 <div class="page-header">
   <h1><%=t '.title', :default => @league.name %> - Leaderboard</h1>
 </div>
-<% cache @leaderboard  do -%> 
+<% cache ['v1',@leaderboard.cache_key] do -%> 
 <table class="table table-striped">
   <thead>
     <tr>
@@ -11,9 +11,12 @@
     </tr>
   </thead>
   <tbody>
+    <% @top_table.each do |pl| %>
     <tr>
-      <td></td>
+      <td><%= pl.player.name %></td>
+      <td><%= pl.score %></td>
     </tr>
+    <% end -%>
   </tbody>
 </table>
 <%end%>

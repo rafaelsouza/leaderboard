@@ -10,6 +10,4 @@ league = League.create!(name: "Ping Pong League")
 
 rafael = Player.create!(name:"Rafael")
 
-league.players << rafael
-
-league.save!
+LeaguePlayer.create!(player:rafael,league:league,score:1000)

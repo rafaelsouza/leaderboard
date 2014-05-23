@@ -4,6 +4,8 @@ class CreateLeaguePlayers < ActiveRecord::Migration
       t.references :league, index: true
       t.references :player, index: true
 
+      t.decimal :score, :precision => 10, :scale => 2
+
       t.timestamps
     end
   end

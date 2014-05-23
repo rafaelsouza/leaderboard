@@ -18,8 +18,8 @@
         <td><%= league.name %></td>
         <td><%=l league.created_at %></td>
         <td>
-          <%#= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_league_path(league), :class => 'btn btn-mini' %>
+          <%= link_to t('.games', :default => t("helpers.links.games")),
+                      league_games_path(league), :class => 'btn btn-mini' %>
           <%#= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       league_path(league),
                       :method => :delete,

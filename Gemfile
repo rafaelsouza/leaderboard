@@ -41,6 +41,9 @@ gem 'puma'
 
 gem "spring", group: :development
 
+gem 'pry'
+gem 'awesome_print'
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0.beta'
 end

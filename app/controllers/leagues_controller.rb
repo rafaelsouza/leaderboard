@@ -10,7 +10,8 @@ class LeaguesController < ApplicationController
   # GET /leagues/1
   # GET /leagues/1.json
   def show
-    @leaderboard = LeaguePlayer.leaderboard_for(@league)
+    @leaderboard = Leaderboard.new(@league)
+    @top_table = @leaderboard.top
   end
 
   # GET /leagues/new

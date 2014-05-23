@@ -2,10 +2,25 @@ class LeaguePlayer < ActiveRecord::Base
   belongs_to :league
   belongs_to :player
 
-  validates_presence_of :league_id, :player_id
+  validates_presence_of :league_id, :player_id, :score
 
-  def performance_rating
-    ELO_MAPPER[league_id][player_id].rating
+  scope :by_league, ->(id) { where(league_id: id) }
+  scope :by_player, ->(id) { where(player_id: id) }
+
+  def self.top(league,items)
+    Rails.cache.fetch(cache_key) do
+      league.league_players.order("score DESC").include(:player)
+    end.first(items)
+  end
+
+  def self.league_cache_key(id)
+    "#{by_league(id).maximum(:updated_at)}-#{by_league(id).count}"
+  end
+
+  def self.cached_league_player(league_id,player_id)
+    Rails.cache.fetch("LeaguePlayer/#{league_id}/#{player_id}") do
+      by_league(league_id).by_player(player_id).first
+    end
   end
 
   def home_games
@@ -31,6 +46,15 @@ class LeaguePlayer < ActiveRecord::Base
   def ties
     games.select{|g| g.tie? }
   end
+
+  def to_elo
+    @elo ||= Elo::Player.new(rating: score)
+  end
+
+  def update_score(elo_player)
+    self.update_attributes!(score: elo_player.rating)
+  end
+
 end
 
 # == Schema Information
