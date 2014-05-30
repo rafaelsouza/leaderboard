@@ -8,6 +8,9 @@
     <tr>
       <th>Name</th>
       <th>Points</th>
+      <th>W</th>
+      <th>L</th>
+      <th>GP</th>
     </tr>
   </thead>
   <tbody>
@@ -15,6 +18,9 @@
     <tr>
       <td><%= pl.player.name %></td>
       <td><%= pl.score %></td>
+      <td><%= pl.wins.size %></td>
+      <td><%= pl.losses.size %></td>
+      <td><%= pl.games.size %></td>
     </tr>
     <% end -%>
   </tbody>
