@@ -69,9 +69,9 @@ class Game < ActiveRecord::Base
     if home_won?
       league_elo_home_player.wins_from(league_elo_away_player)
     elsif away_won?
-      league_elo_home_player.loses_from(league_elo_home_player)
+      league_elo_home_player.loses_from(league_elo_away_player)
     else #tie
-      league_elo_home_player.plays_draw(league_elo_home_player)
+      league_elo_home_player.plays_draw(league_elo_away_player)
     end
     league_home_player.update_score(league_elo_home_player)
     league_away_player.update_score(league_elo_away_player)

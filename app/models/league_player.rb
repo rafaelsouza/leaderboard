@@ -7,6 +7,8 @@ class LeaguePlayer < ActiveRecord::Base
   scope :by_league, ->(id) { where(league_id: id) }
   scope :by_player, ->(id) { where(player_id: id) }
 
+  after_commit :expire_cache
+
   def self.top(league,items)
     Rails.cache.fetch(league_cache_key(league.id)) do
       league.league_players.order("score DESC").includes(:player)
@@ -53,6 +55,12 @@ class LeaguePlayer < ActiveRecord::Base
 
   def update_score(elo_player)
     self.update_attributes!(score: elo_player.rating)
+  end
+
+  private
+
+  def expire_cache
+    Rails.cache.delete("LeaguePlayer/#{league_id}/#{player_id}")
   end
 
 end
