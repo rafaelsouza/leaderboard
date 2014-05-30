@@ -8,8 +8,8 @@ class LeaguePlayer < ActiveRecord::Base
   scope :by_player, ->(id) { where(player_id: id) }
 
   def self.top(league,items)
-    Rails.cache.fetch(cache_key) do
-      league.league_players.order("score DESC").include(:player)
+    Rails.cache.fetch(league_cache_key(league.id)) do
+      league.league_players.order("score DESC").includes(:player)
     end.first(items)
   end
 

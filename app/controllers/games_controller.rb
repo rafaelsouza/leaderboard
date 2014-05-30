@@ -15,21 +15,24 @@ class GamesController < ApplicationController
 
   # GET /games/new
   def new
+    @players = @league.players
     @game = Game.new
   end
 
   # GET /games/1/edit
   def edit
+    @players = @league.players
   end
 
   # POST /games
   # POST /games.json
   def create
     @game = Game.new(game_params)
-
+    @game.league_id = params[:league_id]
+    @players = @league.players
     respond_to do |format|
       if @game.process
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
+        format.html { redirect_to @league, notice: 'Game was successfully created.' }
         format.json { render action: 'show', status: :created, location: @game }
       else
         format.html { render action: 'new' }
@@ -41,9 +44,10 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1
   # PATCH/PUT /games/1.json
   def update
+    @players = @league.players
     respond_to do |format|
       if @game.update(game_params)
-        format.html { redirect_to @game, notice: 'Game was successfully updated.' }
+        format.html { redirect_to @league, notice: 'Game was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -70,7 +74,7 @@ class GamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params.require(:game).permit(:player_home_id, :player_away_id, :home_score, :home_score, :away_score, :away_score)
+      params.require(:game).permit(:home_player_id, :away_player_id, :home_score, :away_score)
     end
 
     def set_league

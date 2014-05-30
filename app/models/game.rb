@@ -44,8 +44,8 @@ class Game < ActiveRecord::Base
 
   def process
     process_game_result
-    home_league_player.save!
-    away_league_player.save!
+    league_home_player.save!
+    league_away_player.save!
     save!
   end
 

@@ -21,8 +21,8 @@
 </table>
 <%end%>
 
-<%#= link_to t('.new', :default => t("helpers.links.new")),
-            new_league_path,
+<%= link_to t('.new Game', :default => t("helpers.links.new")),
+            new_league_game_path(@league),
             :class => 'btn btn-primary' %>
 
 <div class="form-actions">
